@@ -19,7 +19,8 @@ namespace _2DTuber
         static class Global
         {
             private static bool _isTalking = false;
-            private static double _inputSencetivity = 0.10;
+            private static float _inputSencetivity = 0.10f;
+            private static int _audioBufferMilliseconds = 100;
 
             private static string _cursorName = "";
 
@@ -33,10 +34,15 @@ namespace _2DTuber
                 get { return _isTalking; }
                 set { _isTalking = value; }
             }
-            public static double InputSencetivity
+            public static float InputSencetivity
             {
                 get { return _inputSencetivity; }
                 set { _inputSencetivity = value; }
+            }
+            public static int AudioBufferMilliseconds
+            {
+                get { return _audioBufferMilliseconds; }
+                set { _audioBufferMilliseconds = value; }
             }
             public static string CursorName
             {
@@ -67,27 +73,51 @@ namespace _2DTuber
             }
 
         }
+
+        /*
+        static class GlobalHotkeys 
+        {
+            private static char _toggleStatsHUD = ' ';
+            private static char _toggleAlwaysOnTop = Convert.ToChar(Keys.T);
+            private static char _decreaseInputSensetivity = ' ';
+            private static char _increaseInputSensetivity = ' ';
+
+            public static char ToggleAlwaysOnTop
+            {
+                get { return _toggleAlwaysOnTop; }
+                set { _toggleAlwaysOnTop = value; }
+            }
+        }
+        */
         public Form1()
         {
             InitializeComponent();
             InitialSettings();
             SetCursor();
 
+            // Allows files to be dropped into the form
+            this.AllowDrop = true;
+            this.DragEnter += new DragEventHandler(Form1_DragEnter);
+            this.DragDrop += new DragEventHandler(Form1_DragDrop);
+
+            // Sets the form to listen for keyboard inputs
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(Form1_KeyDown);
+
+            // This handles the microphone input levels
             Thread audioThread = new Thread(new ThreadStart(AudioInput));
             audioThread.IsBackground = true; //Will close thread when form is closed
             audioThread.Start();
-
-            //Thread keyInputThread 
 
         }
 
         public void InitialSettings()
         {
-            Global.IdlePose = @"images\spriteClosedd.png";
+            Global.IdlePose = @"images\spriteClosed.png";
             Global.TalkPose = @"images\spriteOpen.png";
             Global.Placeholder = @"images\placeholder.jpg";
 
-            Global.CursorName = "test.ani";
+            Global.CursorName = "cirnoCursor.ani";
 
 
             setImage(Global.IdlePose);
@@ -106,6 +136,62 @@ namespace _2DTuber
             }
         }
 
+        void Form1_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy;
+        }
+
+        void Form1_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            foreach (string file in files)
+                Console.WriteLine(file);
+        }
+
+        void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            //MessageBox.Show("KeyPressed");
+
+            switch (e.KeyCode)
+            {
+                // Toggle always on top
+                case Keys.T:
+                    if (this.TopMost == true)
+                        this.TopMost = false;
+                    else
+                        this.TopMost = true;
+                    break;
+
+                // Increase input sensitivity
+                case Keys.X:
+                    Global.InputSencetivity += 0.01f;
+                    break;
+
+                // Decrease input sencetivity
+                case Keys.Z:
+                    Global.InputSencetivity -= 0.01f;
+                    break;
+
+                // Toggle stats
+                case Keys.P:
+                    if (richTextBox1.Visible == true)
+                        richTextBox1.Visible = false;
+                    else
+                        richTextBox1.Visible = true;
+                    break;
+
+                default:
+                    break;
+            }
+
+            richTextBox1.Clear();
+            richTextBox1.Text =
+                "Input-level transition " + Math.Floor(Global.InputSencetivity * 100) + "%\n\n"
+                + "Is top most: " + this.TopMost + "\n\n";
+
+        }
+
         private void AudioInput()
         {
             bool isRecording = false;
@@ -119,7 +205,7 @@ namespace _2DTuber
                 {
                     DeviceNumber = 0,
                     WaveFormat = new NAudio.Wave.WaveFormat(rate: 44100, bits: 16, channels: 1),
-                    BufferMilliseconds = 100
+                    BufferMilliseconds = Global.AudioBufferMilliseconds
                 };
 
 
@@ -174,9 +260,9 @@ namespace _2DTuber
 
             catch(Exception err)
             {
-                this.pictureBox1.Image = Image.FromFile(Global.Placeholder);
+                //this.pictureBox1.Image = Properties.Resources.placeholder;
+                setImage(Global.Placeholder);
                 //MessageBox.Show(err.Message);
-                
             }
 
         }
