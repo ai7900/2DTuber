@@ -17,4 +17,7 @@
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgPrettyBin Condition=" '$(PkgPrettyBin)' == '' ">C:\Users\Mattias\.nuget\packages\prettybin\1.1.0</PkgPrettyBin>
+  </PropertyGroup>
 </Project>

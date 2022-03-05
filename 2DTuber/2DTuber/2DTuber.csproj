@@ -8,8 +8,17 @@
     <ApplicationIcon>app.ico</ApplicationIcon>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="App.config" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="NAudio" Version="2.0.1" />
+    <PackageReference Include="PrettyBin" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>

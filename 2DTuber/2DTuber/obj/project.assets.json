@@ -125,6 +125,9 @@
           "lib/netstandard2.0/NAudio.WinMM.dll": {}
         }
       },
+      "PrettyBin/1.1.0": {
+        "type": "package"
+      },
       "System.Security.AccessControl/4.7.0": {
         "type": "package",
         "dependencies": {
@@ -326,6 +329,26 @@
         "naudio.winmm.nuspec"
       ]
     },
+    "PrettyBin/1.1.0": {
+      "sha512": "1XX4ibVi/4y96RJwBx8jSuYnOFeB3pepJtH6Vpl1gtsZamRuF3NGtywaJmhBlQPsBBi2ScnvYEmD7mVIsr2/iQ==",
+      "type": "package",
+      "path": "prettybin/1.1.0",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "content/App.config.install.xdt",
+        "license.txt",
+        "makePackage.bat",
+        "nuget.exe",
+        "prettybin.1.1.0.nupkg.sha512",
+        "prettybin.nuspec",
+        "tools/init.ps1",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
     "System.Security.AccessControl/4.7.0": {
       "sha512": "JECvTt5aFF3WT3gHpfofL2MNNP6v84sxtXxpqhLBCcDRzqsPBmHhQ6shv4DwwN2tRlzsUxtb3G9M3763rbXKDg==",
       "type": "package",
@@ -429,7 +452,8 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "NAudio >= 2.0.1"
+      "NAudio >= 2.0.1",
+      "PrettyBin >= 1.1.0"
     ]
   },
   "packageFolders": {
@@ -481,6 +505,10 @@
           "NAudio": {
             "target": "Package",
             "version": "[2.0.1, )"
+          },
+          "PrettyBin": {
+            "target": "Package",
+            "version": "[1.1.0, )"
           }
         },
         "imports": [

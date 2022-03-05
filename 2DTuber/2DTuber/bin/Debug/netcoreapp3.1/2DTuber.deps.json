@@ -8,7 +8,8 @@
     ".NETCoreApp,Version=v3.1": {
       "2DTuber/1.0.0": {
         "dependencies": {
-          "NAudio": "2.0.1"
+          "NAudio": "2.0.1",
+          "PrettyBin": "1.1.0"
         },
         "runtime": {
           "2DTuber.dll": {}
@@ -102,6 +103,7 @@
           }
         }
       },
+      "PrettyBin/1.1.0": {},
       "System.Security.AccessControl/4.7.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0",
@@ -179,6 +181,13 @@
       "sha512": "sha512-i7Da/gCqvwWvETFBRkuwCelSXEK5rPG7pTaqCU9aXFRiO0p7lwHjm/+k2lOWLmRGUJdLm/VSDO6Vknacnb6mSg==",
       "path": "naudio.winmm/2.0.1",
       "hashPath": "naudio.winmm.2.0.1.nupkg.sha512"
+    },
+    "PrettyBin/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-1XX4ibVi/4y96RJwBx8jSuYnOFeB3pepJtH6Vpl1gtsZamRuF3NGtywaJmhBlQPsBBi2ScnvYEmD7mVIsr2/iQ==",
+      "path": "prettybin/1.1.0",
+      "hashPath": "prettybin.1.1.0.nupkg.sha512"
     },
     "System.Security.AccessControl/4.7.0": {
       "type": "package",
