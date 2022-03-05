@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "dgSpecHash": "12lKGZwhtGV6rz3Ub4G/fbSkRae8yBM65RI25fDZI107hmY6WgEDiKVErXSPG9CQA/UnMb8aR1jkgkxKOgRJsA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Mattias\\Documents\\GitHub\\2DTuber\\2DTuber\\2DTuber\\2DTuber.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Mattias\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
+    "C:\\Users\\Mattias\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
+    "C:\\Users\\Mattias\\.nuget\\packages\\naudio\\2.0.1\\naudio.2.0.1.nupkg.sha512",
+    "C:\\Users\\Mattias\\.nuget\\packages\\naudio.asio\\2.0.0\\naudio.asio.2.0.0.nupkg.sha512",
+    "C:\\Users\\Mattias\\.nuget\\packages\\naudio.core\\2.0.0\\naudio.core.2.0.0.nupkg.sha512",
+    "C:\\Users\\Mattias\\.nuget\\packages\\naudio.midi\\2.0.1\\naudio.midi.2.0.1.nupkg.sha512",
+    "C:\\Users\\Mattias\\.nuget\\packages\\naudio.wasapi\\2.0.0\\naudio.wasapi.2.0.0.nupkg.sha512",
+    "C:\\Users\\Mattias\\.nuget\\packages\\naudio.winforms\\2.0.1\\naudio.winforms.2.0.1.nupkg.sha512",
+    "C:\\Users\\Mattias\\.nuget\\packages\\naudio.winmm\\2.0.1\\naudio.winmm.2.0.1.nupkg.sha512",
+    "C:\\Users\\Mattias\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
+    "C:\\Users\\Mattias\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}
