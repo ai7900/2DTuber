@@ -181,6 +181,13 @@ namespace _2DTuber
                         richTextBox1.Visible = true;
                     break;
 
+                case Keys.Q:
+                    if (this.TransparencyKey == Color.Empty)
+                        this.TransparencyKey = Color.Green;
+                    else
+                        this.TransparencyKey = Color.Empty;
+                    break;
+
                 default:
                     break;
             }
@@ -188,7 +195,8 @@ namespace _2DTuber
             richTextBox1.Clear();
             richTextBox1.Text =
                 "Input-level transition " + Math.Floor(Global.InputSencetivity * 100) + "%\n\n"
-                + "Is top most: " + this.TopMost + "\n\n";
+                + "Is top most: " + this.TopMost + "\n\n"
+                + "Transparency Key: " + this.TransparencyKey + "\n\n";
 
         }
 
