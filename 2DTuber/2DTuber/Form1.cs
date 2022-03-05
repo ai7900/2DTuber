@@ -19,8 +19,14 @@ namespace _2DTuber
         static class Global
         {
             private static bool _isTalking = false;
-
             private static double _inputSencetivity = 0.10;
+
+            private static string _cursorName = "";
+
+            private static string _idlePose = "";
+            private static string _talkPose = "";
+            private static string _background = "";
+            private static string _placeholder = "";
 
             public static bool IsTalking
             {
@@ -32,6 +38,34 @@ namespace _2DTuber
                 get { return _inputSencetivity; }
                 set { _inputSencetivity = value; }
             }
+            public static string CursorName
+            {
+                get { return _cursorName; }
+                set { _cursorName = value; }
+            }
+
+            // Images
+            public static string IdlePose
+            {
+                get { return _idlePose; }
+                set { _idlePose = value; }
+            }
+            public static string TalkPose
+            {
+                get { return _talkPose; }
+                set { _talkPose = value; }
+            }
+            public static string Background
+            {
+                get { return _background; }
+                set { _background = value; }
+            }
+            public static string Placeholder
+            {
+                get { return _placeholder; }
+                set { _placeholder = value; }
+            }
+
         }
         public Form1()
         {
@@ -49,27 +83,34 @@ namespace _2DTuber
 
         public void InitialSettings()
         {
-            this.pictureBox1.Image = Image.FromFile(@"images\spriteClosed.gif");
+            Global.IdlePose = @"images\spriteClosedd.png";
+            Global.TalkPose = @"images\spriteOpen.png";
+            Global.Placeholder = @"images\placeholder.jpg";
+
+            Global.CursorName = "test.ani";
+
+
+            setImage(Global.IdlePose);
         }
 
         public void SetCursor()
         {
             try
             {
-                this.Cursor = AdvancedCursors.Create(Path.Combine(Application.StartupPath, "test.ani"));
+                this.Cursor = AdvancedCursors.Create(Path.Combine(Application.StartupPath, Global.CursorName));
             }
-            catch(Exception err)
+            catch (Exception err)
             {
                 MessageBox.Show(err.Message);
                 this.Cursor = System.Windows.Forms.Cursor.Current;
             }
         }
 
-        private void AudioInput()  
+        private void AudioInput()
         {
             bool isRecording = false;
 
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+
             while (true)
             {
                 bool lastState = Global.IsTalking;
@@ -88,22 +129,16 @@ namespace _2DTuber
                     waveIn.StartRecording();
                     isRecording = true;
                 }
-            
-                /*
-                if (Global.IsTalking)
-                    this.BackColor = System.Drawing.Color.Red;
-                else
-                    this.BackColor = System.Drawing.Color.Yellow;
-                */
-                if(Global.IsTalking != lastState)
+
+                if (Global.IsTalking != lastState)
                 {
                     if (lastState == true)
-                        this.pictureBox1.Image = Image.FromFile(@"images\spriteClosed.png");
+                        setImage(Global.IdlePose);
                     else
-                        this.pictureBox1.Image = Image.FromFile(@"images\spriteOpen.png");
+                        setImage(Global.TalkPose);
                 }
             }
-            
+
         }
 
         public static void ShowPeakMono(object sender, NAudio.Wave.WaveInEventArgs args)
@@ -111,15 +146,15 @@ namespace _2DTuber
             float maxValue = 32767;
             int peakValue = 0;
             int bytesPerSample = 2;
-            for(int index = 0; index < args.BytesRecorded; index += bytesPerSample)
+            for (int index = 0; index < args.BytesRecorded; index += bytesPerSample)
             {
                 int value = BitConverter.ToInt16(args.Buffer, index);
                 peakValue = Math.Max(peakValue, value);
             }
 
-            
 
-            if((peakValue / maxValue) >= Global.InputSencetivity)
+
+            if ((peakValue / maxValue) >= Global.InputSencetivity)
             {
                 Global.IsTalking = true;
             }
@@ -127,16 +162,27 @@ namespace _2DTuber
             {
                 Global.IsTalking = false;
             }
-            
+
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        public void setImage(string imagePath)
         {
-            
+            try
+            {
+                this.pictureBox1.Image = Image.FromFile(imagePath);
+            }
+
+            catch(Exception err)
+            {
+                this.pictureBox1.Image = Image.FromFile(Global.Placeholder);
+                //MessageBox.Show(err.Message);
+                
+            }
+
         }
 
+        private void pictureBox1_Click(object sender, EventArgs e) { }
     }
-
     public class AdvancedCursors
     {
         [DllImport("User32.dll")]
